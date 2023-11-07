@@ -21,5 +21,6 @@ from . import views
 
 urlpatterns = [
     path('', views.block, name="block"),
-    path('layout', views.layout, name="layout")
+    path('layout', views.layout, name="layout"),
+    path('tasks', views.task, name="task")
 ]

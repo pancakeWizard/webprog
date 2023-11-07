@@ -8,12 +8,13 @@
 </head>
 <body>
     {%block content%}
-    <h1>Block page</h1>
-    <form action="{%url 'task'%}" method="post">
-        {% csrf_token %}
-        <input type="text" name="input">
-        <input type="submit" value="Submit">
-    </form>
+        <h1>Det är en list-page</h1>
+        <ul>
+            {%for task in tasks%}
+                <li>{{task}}</li>
+            {%endfor%}
+        </ul>
     {%endblock%}
+
 </body>
 </html>
