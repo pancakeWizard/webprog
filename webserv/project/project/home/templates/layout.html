@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    {% block title %}
+    <title>Project navbar template</title>
+    {% endblock title %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand ps-4" href="{% url 'home' %}">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'calchome' %}">Kalkylatorn</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Logga in</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="navigation">
+        <div class="main_container">
+          <a href=""><img src="{% static  %}" alt=""></a>
+        </div>
+        
+      </div>
+      {% block content %}
+      {% endblock content %}
+</body>
+</html>

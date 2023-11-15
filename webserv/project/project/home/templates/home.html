@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/main.css">
+    {% block title %}
+    <title>Home</title>
+    {% endblock title %}
+    
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <div class="row m-5">
+            <h3>Homepage</h3>
+            <hr>
+            <p>Hej och välkommen till min hemsida, jag har valt att göra alla appar 1 - 4 och ska där visa att jag når ett betyg A.</p>
+            <p>Om du går till fliken "/math" så kommer du att få en multiplikationstabell.</p>
+            <p>Går du till logga in, får du formulär att fylla i  och vi visar ett fin restulatat efteråt.</p>
+            <p>Går du till Todo-listan så har jag skapat en avancerad to-do lista som gör att du kan kategorisera dina uppgifter.</p>
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+</html>
