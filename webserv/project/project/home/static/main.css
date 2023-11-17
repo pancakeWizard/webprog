@@ -1,3 +1,55 @@
 ul{
     list-style: none;
 }
+
+.navigation{
+    position: absolute;
+    bottom: 30px;
+    left: 35px;
+}
+
+.home_link{
+    display: block;
+    border-radius: 100%;
+    background-color: #bab245;
+    padding: 10px;
+}
+
+.home_link img, .form_link img {
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+}
+
+.calc_link img{
+    width: 30px;
+    height: 30px;
+}
+
+.calc_link{
+    opacity: 0;
+    transition: 0.5s;
+    display: block;
+    position: absolute;
+    bottom: 30px;
+    left: 15px;
+    border-radius: 100%;
+    padding: 10px 12px 0px 10px;
+    background-color: #a0993b;
+    width: 50px;
+    height: 50px;
+}
+
+.form_link {
+    opacity: 0;
+    transition: 0.3s;
+    display: block;
+    position: absolute;
+    bottom: 1px;
+    left: 1px;
+    border-radius: 100%;
+    padding: 10px;
+    background-color: #e8e5c0;
+}
+
+
