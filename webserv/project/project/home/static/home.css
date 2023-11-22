@@ -1,0 +1,37 @@
+.card{
+    background-color: #EFECE7;
+    border-radius: 0.8rem;
+    width: 18rem;
+    height: 15rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.primary_accent{
+    background-color: #F1EDC0;
+}
+
+.card p{
+    font-size: 0.9rem;
+    flex-grow: 1;
+}
+.card button{
+    background-color: #B4CFFD;
+    border-radius: 0.5rem;
+    padding: 0.6rem 2rem;
+    transition: 0.3s;
+}
+
+.primary_accent button{
+    background-color: #A9C304;
+}
+
+.primary_accent a:hover button{
+    box-shadow: 0 0 2rem rgba(169,195,4,0.9);
+}

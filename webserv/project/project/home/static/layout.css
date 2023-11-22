@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;700&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul{
+    display: flex;
+    list-style: none;
+    height: 100%;
+}
+
+.navigation{
+    position: absolute;
+    bottom: 30px;
+    left: 35px;
+}
+
+.home_link{
+    display: block;
+    border-radius: 100%;
+    background-color: #bab245;
+    padding: 10px;
+}
+
+.home_link img, .form_link img {
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+}
+
+.calc_link img{
+    width: 30px;
+    height: 30px;
+}
+
+.calc_link{
+    opacity: 0;
+    transition: 0.5s;
+    display: block;
+    position: absolute;
+    bottom: 30px;
+    left: 15px;
+    border-radius: 100%;
+    padding: 10px 12px 0px 10px;
+    background-color: #a0993b;
+    width: 50px;
+    height: 50px;
+}
+
+.form_link {
+    opacity: 0;
+    transition: 0.3s;
+    display: block;
+    position: absolute;
+    bottom: 1px;
+    left: 1px;
+    border-radius: 100%;
+    padding: 10px;
+    background-color: #e8e5c0;
+}
+
+.navcontainer{
+    width: 100%;
+}
+
+input{
+    display: block;
+    margin: 0.5rem 0;
+}
+
+nav{
+    width: 100%;
+    height: 4rem;
+    box-shadow: 0px 1px 20px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+nav li{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 1.15rem;
+}
+
+nav li a{
+    font-size: 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+nav li a img{
+    margin-right: 1rem;
+}
+
+.nav_main{
+    /* height: 100%; */
+    display: flex;
+}
+
+.item_btn{
+    height: 2.5rem;
+}
+
+li button{
+    padding: 0 2rem;
+    background-color: #B4CFFD;
+    height:100%;
+    border-radius: 0.5rem;
+    transition: 0.3s;
+}
+
+.hover_secondary:hover button{
+    cursor: pointer;
+    transform: translate(0,-0.2rem);
+}
