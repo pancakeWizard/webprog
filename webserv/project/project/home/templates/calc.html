@@ -1,45 +1,46 @@
 {% extends 'layout.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block title %}
+    <link rel="stylesheet" href="{% static 'calc.css' %}">
     <title>Kalkylatorn</title>
     {% endblock title %}
 </head>
 <body>
     {% block content %}
     <div class="container">
-        <div class="row m-5">
-            <h3>Kalkylatorn</h3>
-            <hr>
-            <p>Gå till "/table/n", där n är ett heltal och se Multiplikationstabell för detta talet!</p>
-            <p>Eller fyll i formulär:</p>
+        <div class="header_content">
+            <h1>Kalkylatorn</h1>
+            <p>Skriv ett tal i URL eller i rutan nere för att se multiplikationstabell!</p>
             <form action="{% url 'calcform'%}" method="post">
                 {% csrf_token %}
-                <input type="number" name="number">
-                <input type="submit" value="kör!">
+                <input type="number" name="number" class="input_number">
+                <input type="submit" value="Kör!" class="input_send">
             </form>
-            <hr>
+        </div>
+        <div class="content">
             {% if results %}
-            <p>Multiplikationstabell med tal {{number}}</p>
-            <ul>
-                {%for result in results%}
-                    <li>{{number}} * {{forloop.counter}} = {{result}}</li>
-                {%endfor%}
-            </ul>
+                <h3>Multiplikationstabell med {{ number }}</h3>
+                <table>
+                    {%for result in results%}
+                    <tr>
+                        <td>{{number}}</td>
+                        <td>*</td>
+                        <td>{{forloop.counter}}</td>
+                        <td>=</td>
+                        <td>{{result}}</td>
+                    </tr>
+                    {%endfor%}
+                </table>
+                
             {% else %}
-            <p>Några exemplar: </p>
-            <a href="{% url 'calc' 1 %}" class="link-primary">Testa multiplikation med 1</a>
-            <a href="{% url 'calc' 5 %}" class="link-primary">Testa multiplikation med 5</a>
-            <a href="{% url 'calc' 10 %}" class="link-primary">Testa multiplikation med 10</a>
-            <a href="{% url 'calc' 32 %}" class="link-primary">Testa multiplikation med 32</a>
-            <a href="{% url 'calc' 100 %}" class="link-primary">Testa multiplikation med 100</a>
+                <h3>Multiplikationstabell</h3>
             {% endif %}
         </div>
-    </div>
-    
     {% endblock content %}
 </body>
 </html>

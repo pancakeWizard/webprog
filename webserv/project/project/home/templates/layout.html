@@ -19,7 +19,10 @@
         <li><a href="{% url 'home' %}"><img src="{% static 'img/home.svg' %}" alt="">Home</a></li>
         <li><a href="{% url 'calchome' %}"><img src="{% static 'img/calc.svg' %}" alt="">Kalkylatorn</a></li>
         {% if  user.is_authenticated %}
-          <li><a href="{% url 'toDo' %}"><img src="{% static 'img/todo.svg' %}" alt="">To-Do lista</a></li>
+          <li class="todo_nav"><a href="{% url 'toDo' %}"><img src="{% static 'img/todo.svg' %}" alt="">To-Do lista</a></li>
+          <div class="todo_count">
+            <a href="{% url 'toDo' %}"><p></p></a>
+          </div>
         {% endif %}
       </ul>
       <ul>

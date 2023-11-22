@@ -1,0 +1,27 @@
+form{
+    display: flex;
+    gap: 2%;
+}
+
+.input_number{
+    outline: 2px solid black;
+    border-radius: 0.5rem;
+    width: 78%;
+    padding: 0.5rem 1rem;
+}
+
+.input_send{
+    background-color: #A9C304;
+    width: 20%;
+    outline: 2px solid #A9C304;
+    border-radius: 0.5rem;
+}
+
+.content{
+    border-radius: 0.5rem;
+    background-color: #EFECE7;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}

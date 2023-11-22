@@ -1,0 +1,16 @@
+.header_content p{
+    padding: 0 0 1rem 0;
+}
+
+.header_content button{
+    margin: 1rem 0 0 0;
+    padding: 0.8rem 2.5rem;
+    border-radius: 0.5rem;
+    background-color: #A9C304;
+}
+
+.hover_secondary:hover button{
+    cursor: pointer;
+    transform: translate(0,-0.2rem);
+    box-shadow: 0 0 2rem rgba(169,195,4,0.9);
+}

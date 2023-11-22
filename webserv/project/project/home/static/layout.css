@@ -5,6 +5,7 @@
     border: none;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 ul{
@@ -128,4 +129,21 @@ li button{
 .hover_secondary:hover button{
     cursor: pointer;
     transform: translate(0,-0.2rem);
+}
+
+.todo_count{
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 100%;
+    background-color: #A9C304;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 0.5rem;
+    right: 1rem;
+}
+
+.todo_count p{
+    font-size: 11px;
 }
