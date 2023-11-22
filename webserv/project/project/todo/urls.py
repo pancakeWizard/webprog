@@ -17,13 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('home/', include("home.urls")),
-    path('math/', include("calc.urls")),
-    path('todo/', include("todo.urls")),
-    path('user/', include("form.urls")),
+    path('', views.toDo, name='toDo'),
+    path('task/status_finish', views.changeStatus, name='changeStatus'),
+    path('add', views.toDoAdd, name='toDoAdd'),
+    path('add/category', views.categoryAdd, name='categoryAdd'),
+    path('add/category/', views.categoryApplier, name='categoryApplier'),
+    path('add/', views.toDoAddApplier, name='toDoAddApplier'),
+    path('task/<int:taskID>', views.changeTask, name='changeTask'),
+    path('task/applyChange', views.changeTaskApply, name='changeTaskApply'),
 ]
-
-handler404 = 'home.views.custom_404'

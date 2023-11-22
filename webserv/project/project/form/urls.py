@@ -17,13 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('home/', include("home.urls")),
-    path('math/', include("calc.urls")),
-    path('todo/', include("todo.urls")),
-    path('user/', include("form.urls")),
+    path('signin', views.signin, name='signin'),
+    # path('signin/<int:error>', views.signin, name='signin'),
+    path('signin/apply', views.signin_getdata, name='signin_getdata'),
+    path('login', views.user_login, name='user_login'),
+    path('login/auth', views.auth, name='auth'),
+    path('profile', views.profile, name='profile'),
+    path('profile/change', views.profileChange, name='profileChange'),
+    path('profile/change/', views.profileChangeForm, name='profileChangeForm'),
+    path('logout', views.user_logout, name='user_logout')
+    
 ]
-
-handler404 = 'home.views.custom_404'

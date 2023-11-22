@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         
     })
     mainMenuBtn.addEventListener("mouseleave", () => {
-        sleep(500)
+        sleep(200)
         calcMenuBtn.style.opacity = '0'
         calcMenuBtn.style.bottom = '30px'
         calcMenuBtn.style.left = '15px'

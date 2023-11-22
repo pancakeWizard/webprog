@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>Ändra - {{ username }}</title>
+    {% endblock title %}
+</head>
+<body>
+    {% block content %}
+        <div class="container">
+            <div class="row">
+                <h3>Profil {{ username }}</h3>
+                <div class="col-2">
+                    <p>Namn</p>
+                    <p>Efternamn</p>
+                    <p>E-postadress</p>
+                </div>
+                <div class="col-2">
+                    <form action="{% url 'profileChangeForm' %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="firstName" id="" placeholder="{{ name }}">
+                        <input type="text" name="lastName" id="" placeholder="{{ lastname }}">
+                        <input type="email" name="email" id="" placeholder="{{ email }}">
+                        <input type="submit" value="Spara" class="btn btn-primary form-sender">
+                    </form>
+                </div>               
+            </div>
+        </div>
+    {% endblock content %}
+</body>
+</html>

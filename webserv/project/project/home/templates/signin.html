@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>Sign in</title>
+    {% endblock title %}
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <div class="row col-8">¨
+            <form action="{% url 'signin_getdata' %}" method="post">
+            {% csrf_token %}
+            <h3>Sign in</h3>
+            {% if error %}
+                <p>{{ error }}</p>
+            {% endif %}
+                <input type="text" name="nickname" id="" placeholder="nickname">
+                <input type="password" name="password" id="" placeholder="lösenord">
+                <input type="password" name="passwordConfirm" id="" placeholder="Bekräfta lösenord">
+                <input type="email" name="email" id="" placeholder="e-postadress">
+                <input type="submit" value="Sing in" class="btn btn-primary form-sender">
+                <button class="btn btn-secondary"><a href="{% url 'user_login' %}"  class="link-light">Log in</a></button>
+            </form>
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+</html>

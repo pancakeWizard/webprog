@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>Ändra - {{ task.task }}</title>
+    {% endblock title %}
+</head>
+<body>
+    {% block content %}
+    <div class="container mt-5 col-3">
+        <div class="row">
+            <h3>Ändra - {{ task.task }}</h3>
+            <form action="{% url 'changeTaskApply' %}" method="post">
+                {% csrf_token %}
+                {% if task %}
+                <label for="newtaskname">Uppgift:</label>
+                <input type="text" name="newtaskname" id="" placeholder="{{ task.task }}" class="form-control">
+                <label for="category">Kategori:</label>
+                <select name="category" id="" class="form-control">
+                    {% for category in categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+                <a href="{% url 'categoryAdd' %}"  class="link-dark">Lägg till kategori</a>
+                <p class="mt-2">Läge:</p>
+                <div class="form-check">
+                    <label for="status_1" class="form-check-label">Pågående</label>
+                    <input type="radio" name="status" id="" class="form-check-input" value="1">
+                </div>
+                <div class="form-check">
+                    <label for="status_1" class="form-check-label">Slutfört</label>
+                    <input type="radio" name="status" id="" class="form-check-input" value="2">
+                </div>
+                <input type="submit" value="Spara" class="btn btn-primary" class="form-control">   
+                <input type="number" name="taskID" id=""value="{{ task.id }}" style="display: none;">            
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+</html>

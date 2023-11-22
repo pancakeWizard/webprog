@@ -52,4 +52,11 @@ ul{
     background-color: #e8e5c0;
 }
 
+.navcontainer{
+    width: 100%;
+}
 
+input{
+    display: block;
+    margin: 0.5rem 0;
+}

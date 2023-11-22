@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>Log in</title>
+    {% endblock title %}
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <div class="row col-2">
+            <form action="{% url 'auth' %}" method="post">
+            {% csrf_token %}
+            <h3>Log in</h3>
+            {% if error %}
+                <p>{{ error }}</p>
+            {% endif %}
+            
+                
+                <input type="text" name="username" id="" placeholder="användarnamn">
+                <input type="password" name="password" id="" placeholder="lösenord">
+                <input type="submit" value="Log in" class="btn btn-primary form-sender">
+                <button class="btn btn-secondary"><a href="{% url 'signin' %}"  class="link-light">Sign in</a></button>
+            </form>
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+</html>
