@@ -21,3 +21,14 @@ h3 {
 button, a{
     transition: 0.3s;
 }
+
+input{
+    border-radius: 0.2rem;
+    outline: 2px solid #000;
+    height: 2rem;
+    padding: 0 1rem;
+}
+
+.accent_link{
+    color: #2205E1;
+}

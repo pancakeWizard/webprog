@@ -15,6 +15,13 @@ form{
     width: 20%;
     outline: 2px solid #A9C304;
     border-radius: 0.5rem;
+    transition: 0.3s;
+}
+
+.input_send:hover{
+    cursor: pointer;
+    transform: translate(0,-0.2rem);
+    box-shadow: 0 0 2rem rgba(169,195,4,0.9);
 }
 
 .content{
