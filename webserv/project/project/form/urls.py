@@ -21,10 +21,9 @@ from . import views
 
 urlpatterns = [
     path('signin', views.signin, name='signin'),
-    # path('signin/<int:error>', views.signin, name='signin'),
-    path('signin/apply', views.signin_getdata, name='signin_getdata'),
+    path('signin/', views.signin_getdata, name='signin_getdata'),
     path('login', views.user_login, name='user_login'),
-    path('login/auth', views.auth, name='auth'),
+    path('login/', views.auth, name='auth'),
     path('profile', views.profile, name='profile'),
     path('profile/change', views.profileChange, name='profileChange'),
     path('profile/change/', views.profileChangeForm, name='profileChangeForm'),

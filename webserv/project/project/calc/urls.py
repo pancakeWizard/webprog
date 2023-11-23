@@ -21,6 +21,6 @@ from . import views
 
 urlpatterns = [
     path('', views.calchome, name="calchome"),
-    path('table/<int:number>', views.calc, name="calc"),
+    path('<int:number>', views.calc, name="calc"),
     path('table', views.calcform, name="calcform")
 ]

@@ -28,10 +28,10 @@ def signin_getdata(request):
             except:
                 return render(request, 'signin.html', {"error":cannotCreateUser})
             else:
-                return redirect('/user/login')
-
+                return redirect('user_login')
         else:
             return render(request, 'signin.html', {"error":notConfirmed})
+    return redirect('signin')
 
 def user_login(request, error=None):
     if not error:
@@ -50,7 +50,7 @@ def auth(request):
         else:
             return render(request, 'login.html', {'error': wrongUserData})
     else:
-        return render(request, 'login.html')
+        return redirect('user_login')
     
 def profile(request):
     user = request.user
@@ -62,7 +62,7 @@ def profile(request):
         joined_send = user.date_joined
         return render(request, 'profile.html', {'username': username_send, 'email': email_send, 'name':firstName_send, 'lastname':lastName_send, 'joined':joined_send})
     else:
-        return render(request, 'login.html', {'error': 'Logga in för att kunna se denna sidan.'})
+        return redirect('login')
 
 def profileChange(request):
     user = request.user

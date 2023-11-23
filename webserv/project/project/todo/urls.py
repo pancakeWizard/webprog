@@ -21,11 +21,11 @@ from . import views
 
 urlpatterns = [
     path('', views.toDo, name='toDo'),
-    path('task/status_finish', views.changeStatus, name='changeStatus'),
-    path('add', views.toDoAdd, name='toDoAdd'),
-    path('add/category', views.categoryAdd, name='categoryAdd'),
-    path('add/category/', views.categoryApplier, name='categoryApplier'),
-    path('add/', views.toDoAddApplier, name='toDoAddApplier'),
-    path('task/<int:taskID>', views.changeTask, name='changeTask'),
-    path('task/applyChange', views.changeTaskApply, name='changeTaskApply'),
+    path('finishtask', views.changeStatus, name='changeStatus'),
+    path('add_task', views.toDoAdd, name='toDoAdd'),
+    path('add_category', views.categoryAdd, name='categoryAdd'),
+    path('add_category/', views.categoryApplier, name='categoryApplier'),
+    path('add_task/', views.toDoAddApplier, name='toDoAddApplier'),
+    path('<int:taskID>', views.changeTask, name='changeTask'),
+    path('applyChange', views.changeTaskApply, name='changeTaskApply'),
 ]

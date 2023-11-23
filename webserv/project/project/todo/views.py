@@ -20,8 +20,11 @@ def toDo(request):
                 for status in statuses:
                     if task.status == status.id:
                         task.status = status.status_name
-                if task.task[0] == '' or task.task[0] == '\n':
-                    task.task.pop(0)
+                try:
+                    if task.task[0] == '' or task.task[0] == '\n':
+                        task.task.pop(0)
+                except:
+                    task.task = "Tom uppgift"
                 tasks.append(task)
     else:
         return rdirect('login')
@@ -63,7 +66,7 @@ def toDoAddApplier(request):
 def categoryAdd (request):
     user = request.user
     if user.is_authenticated:
-        return render(request, 'todoadd.html')
+        return redirect('toDoAdd')
     else:
         return redirect('login')
 
@@ -72,7 +75,7 @@ def categoryApplier (request):
     if user.is_authenticated:
         if request.method == "POST":
             name = request.POST.get('categoryname')
-            print(name)
+
             if request.POST.get('categoryname'):
                 TaskCategory.objects.create(category_name = request.POST.get('categoryname'))
                 return redirect('toDo')
@@ -128,17 +131,13 @@ def changeTaskApply(request):
             taskID = request.POST.get('taskID')
             category_name_get = request.POST.get('category')
             categories = TaskCategory.objects.all()
-            print(name)
-            print(taskID)
             for category in categories:
                 if category.category_name == category_name_get:
                     category_name_get = category.id
             status = request.POST.get('status')
             taskList = TaskList.objects.all()
             for task in taskList:
-                print(task.id)
                 if task.id == int(taskID):
-                    print('123')
                     task.task = name
                     task.category = category_name_get
                     task.status = int(status)
