@@ -26,4 +26,3 @@ urlpatterns = [
     path('user/', include("form.urls")),
 ]
 
-handler404 = 'home.views.custom_404'

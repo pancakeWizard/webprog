@@ -20,9 +20,13 @@
         <li><a href="{% url 'calchome' %}"><img src="{% static 'img/calc.svg' %}" alt="">Kalkylatorn</a></li>
         {% if  user.is_authenticated %}
           <li class="todo_nav"><a href="{% url 'toDo' %}"><img src="{% static 'img/todo.svg' %}" alt="">To-Do lista</a></li>
-          <div class="todo_count">
-            <a href="{% url 'toDo' %}"><p></p></a>
-          </div>
+          {% if task_amount > 0 %}
+            <div class="todo_count">
+              <a href="{% url 'toDo' %}">
+                <p>{{ task_amount }}</p>
+              </a>
+            </div>
+          {% endif %}
         {% endif %}
       </ul>
       <ul>

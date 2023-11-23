@@ -9,7 +9,7 @@
     background-color: #A9C304;
 }
 
-.hover_secondary:hover button{
+.hover_secondary_call:hover button{
     cursor: pointer;
     transform: translate(0,-0.2rem);
     box-shadow: 0 0 2rem rgba(169,195,4,0.9);
