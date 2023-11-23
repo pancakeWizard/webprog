@@ -1,24 +1,27 @@
 {% extends 'layout.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block title %}
-    <title>Profile - {{ username }}</title>
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+    <title>Profil - {{ username }}</title>
     {% endblock title %}
 </head>
 <body>
     {% block content %}
-    <div class="container mt-5">
-        <div class="row col-4">
-            <h3>Profil - {{ username }}</h3>
+    <div class="container">
+        <div class="header_content">
+            <h1>Min profil</h1>
             <p>Användarnamn: {{ username }}</p>
             <p>Namn: {{ name }}</p>
             <p>Efternamn: {{ lastname }}</p>
             <p>E-postadress: {{ email }}</p>
             <p>Du är med oss från {{ joined }}</p>
-            <button type="button" class="btn btn-primary"><a href="{% url 'profileChange' %}" class="link-light">Ändra information</a></button>
+
+            <a href="{% url 'profileChange' %}" class="hover_secondary_call"><button type="button">Ändra information</button></a>
         </div>
     </div>
     {% endblock content %}

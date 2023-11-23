@@ -1,11 +1,12 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="{% static 'layout.css' %}">
+    <link rel="stylesheet" href="{% static 'general.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="{% static 'img/9094-feelsratman.png' %}" type="image/x-icon">
     {% block title %}
@@ -13,37 +14,30 @@
     {% endblock title %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">    
-      <div class="d-flex justify-content-between navcontainer">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item ps-5">
-            <a href="{% url 'home' %}" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item ps-5">
-            <a href="{% url 'calchome' %}" class="nav-link">Kalkylatorn</a>
-          </li>
-          {% if  user.is_authenticated%}
-          <li class="nav-item ps-5">
-            <a href="{% url 'toDo' %}" class="nav-link">To-Do lista</a>
-          </li>
+  <nav>
+      <ul>
+        <li><a href="{% url 'home' %}"><img src="{% static 'img/home.svg' %}" alt="">Home</a></li>
+        <li><a href="{% url 'calchome' %}"><img src="{% static 'img/calc.svg' %}" alt="">Kalkylatorn</a></li>
+        {% if  user.is_authenticated %}
+          <li class="todo_nav"><a href="{% url 'toDo' %}"><img src="{% static 'img/todo.svg' %}" alt="">To-Do lista</a></li>
+          {% if task_amount > 0 %}
+            <div class="todo_count">
+              <a href="{% url 'toDo' %}">
+                <p>{{ task_amount }}</p>
+              </a>
+            </div>
           {% endif %}
-        </ul>
-        <ul class="navbar-nav mx-5">
-            {% if  user.is_authenticated%}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'profile' %}">{{ user.username }}</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'user_logout' %}">Logga ut</a>
-            </li>
-            {% else %}
-            <li class="nav-item ">
-              <a class="nav-link" href="{% url 'user_login' %}">Logga in</a>
-            </li>
-            {% endif %}
-        </ul>
-      </div>
-    </nav>
+        {% endif %}
+      </ul>
+      <ul>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'profile' %}"><img src="{% static 'img/profile.svg' %}" alt=""><b>{{ user.username }}</b></a></li>
+          <li class="hover_secondary"><a href="{% url 'user_logout' %}" class="item_btn"><button>Logga ut</button></a></li>
+        {% else %}
+          <li class="hover_secondary"><a href="{% url 'user_login' %}" class="item_btn"><button>Logga in</button></a></li>
+        {% endif %}
+      </ul>
+  </nav>
       {% block content %}
       {% endblock content %}
 </body>

@@ -1,0 +1,109 @@
+.content{
+    flex-direction: column;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+th{
+    padding: 0.5rem 1rem;
+}
+
+.th_content{
+    
+    padding: 0.25rem 3rem 0.25srem 0;
+}
+
+tr{
+    border-bottom: 1px solid black;
+}
+
+.td_content{
+    padding-right: 3rem;
+}
+
+.container button{
+    margin: 1rem 0 0 0;
+    padding: 0.8rem 2.5rem;
+    border-radius: 0.5rem;
+    background-color: #A9C304;
+    transition: 0.3s;
+}
+
+.hover_secondary_call:hover button, .hover_secondary_call:hover{
+    cursor: pointer;
+    transform: translate(0,-0.2rem);
+    box-shadow: 0 0 2rem rgba(169,195,4,0.9);
+} 
+
+.hover_primary_call button{
+    background-color: #B4CFFD;
+    transition: 0.3s;
+}
+
+.hover_primary_call:hover button{
+    cursor: pointer;
+    transform: translate(0,-0.2rem);
+} 
+
+input{
+    border-radius: 0.2rem;
+    outline: 2px solid #000;
+    height: 2rem;
+    padding: 0 1rem;
+}
+
+.no_outline{
+    outline: none;
+}
+
+label{
+    background-color: #fff;
+    position: relative;
+    top: 1.1rem;
+    left: 0.8rem;
+    padding: 0 0.5rem;
+}
+
+.option_label{
+    top: 0.75rem;
+}
+
+.radio_label{
+    top: 0;
+    left: 0;
+}
+
+select{
+    display: block;
+    border-radius: 0.2rem;
+    outline: 2px solid #000;
+    height: 2.5rem;
+    padding: 0 1rem;
+    background-color: #fff;
+}
+
+.link_btn{
+    display: inline-block;
+    margin: 1rem 0 0 0;
+    padding: 0.7rem 2.4rem;
+    border-radius: 0.5rem;
+    background-color: #A9C304;
+    transition: 0.3s;
+}
+
+.link_btn:hover{
+    cursor: pointer;
+    transform: translate(0,-0.2rem);
+    box-shadow: 0 0 2rem rgba(169,195,4,0.9);
+}
+
+.form-check{
+    display: flex;
+    align-items: center;
+}
+
+.space{
+    margin-top: 1rem;;
+}

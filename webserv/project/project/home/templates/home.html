@@ -1,11 +1,12 @@
 {% extends 'layout.html' %}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/main.css">
     {% block title %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
     <title>Home</title>
     {% endblock title %}
     
@@ -13,13 +14,27 @@
 <body>
     {% block content %}
     <div class="container">
-        <div class="row m-5">
-            <h3>Homepage</h3>
-            <hr>
+        <div class="header_content">
+            <h1>Homepage</h1>
             <p>Hej och välkommen till min hemsida, jag har valt att göra alla appar 1 - 4 och ska där visa att jag når ett betyg A.</p>
-            <p>Om du går till fliken <a href="{% url 'calchome' %}" class="link-primary">"/math/"</a> så kommer du att få en multiplikationstabell.</p>
-            <p>Går du till logga in, får du åtkomst till To-Do lista och din profil</p>
-            <p>Går du till Todo-listan så har jag skapat en avancerad to-do lista som gör att du kan kategorisera dina uppgifter.</p>
+        </div>
+        <div class="content">
+            <div class="card">
+                <h3>Kalkylatorn</h3>
+                <p>En enkel form av multiplikationstabell med exemplar. Du kan sätta eget tal i URL eller fylla i formulär och se resultat!</p>
+                <a href="{% url 'calchome' %}" class="hover_secondary"><button>Gå och testa</button></a>
+            </div>
+            <div class="card primary_accent">
+                <h3>To-Do lista</h3>
+                <p>En avanserad to-do lista där du kan skapa, kategorisera och ändra dina uppgifter.
+                    OBS: logga in först!</p>
+                <a href="{% url 'user_login' %}" class="hover_secondary"><button>Logga in</button></a>
+            </div>
+            <div class="card">
+                <h3>Din profil</h3>
+                <p>Skapa eget konto för att kunna spara sina uppgifter och se din profil. Du kan alltid ändra info eller byta lösenord.</p> <br>
+                <a href="{% url 'signin' %}" class="hover_secondary"><button>Skapa konto</button></a>
+            </div>
         </div>
     </div>
     {% endblock content %}

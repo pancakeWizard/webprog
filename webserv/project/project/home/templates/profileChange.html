@@ -1,32 +1,32 @@
 {% extends 'layout.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block title %}
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
     <title>Ändra - {{ username }}</title>
     {% endblock title %}
 </head>
 <body>
     {% block content %}
         <div class="container">
-            <div class="row">
-                <h3>Profil {{ username }}</h3>
-                <div class="col-2">
-                    <p>Namn</p>
-                    <p>Efternamn</p>
-                    <p>E-postadress</p>
-                </div>
-                <div class="col-2">
+            <h1>Ändra - {{ username }}</h1>
+            <div class="content">
+                <div class="header_content">
                     <form action="{% url 'profileChangeForm' %}" method="post">
                         {% csrf_token %}
+                        <label for="firstName">Namn</label>
                         <input type="text" name="firstName" id="" placeholder="{{ name }}">
+                        <label for="lastName">Efternamn</label>
                         <input type="text" name="lastName" id="" placeholder="{{ lastname }}">
+                        <label for="email">e-post</label>
                         <input type="email" name="email" id="" placeholder="{{ email }}">
-                        <input type="submit" value="Spara" class="btn btn-primary form-sender">
-                    </form>
-                </div>               
+                        <a href="" class="hover_secondary_call"><button type="submit">Spara</button></a>
+                    </form>      
+                </div>        
             </div>
         </div>
     {% endblock content %}
