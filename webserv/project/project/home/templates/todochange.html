@@ -1,41 +1,43 @@
 {% extends 'layout.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block title %}
+    <link rel="stylesheet" href="{% static 'todo.css' %}">
     <title>Ändra - {{ task.task }}</title>
     {% endblock title %}
 </head>
 <body>
     {% block content %}
-    <div class="container mt-5 col-3">
-        <div class="row">
+    <div class="container">
+        <div class="content">
             <h3>Ändra - {{ task.task }}</h3>
             <form action="{% url 'changeTaskApply' %}" method="post">
                 {% csrf_token %}
                 {% if task %}
                 <label for="newtaskname">Uppgift:</label>
-                <input type="text" name="newtaskname" id="" placeholder="{{ task.task }}" class="form-control">
-                <label for="category">Kategori:</label>
+                <input type="text" name="newtaskname" id="" placeholder="{{ task.task }}" class="form-control" value="{{ task.task }}">
+                <label for="category" class="option_label">Kategori:</label>
                 <select name="category" id="" class="form-control">
                     {% for category in categories %}
                         <option value="{{ category }}">{{ category }}</option>
                     {% endfor %}
                 </select>
-                <a href="{% url 'categoryAdd' %}"  class="link-dark">Lägg till kategori</a>
-                <p class="mt-2">Läge:</p>
+                <a href="{% url 'categoryAdd' %}"  class="accent_link">Lägg till kategori</a>
+                <p class="space">Läge:</p>
                 <div class="form-check">
-                    <label for="status_1" class="form-check-label">Pågående</label>
-                    <input type="radio" name="status" id="" class="form-check-input" value="1">
+                    <input type="radio" name="status" id="radio_1" class="no_outline" value="1" checked>
+                    <label for="radio_1" class="radio_label">Pågående</label>
                 </div>
                 <div class="form-check">
-                    <label for="status_1" class="form-check-label">Slutfört</label>
-                    <input type="radio" name="status" id="" class="form-check-input" value="2">
+                    <input type="radio" name="status" id="radio_2" class="no_outline" value="2">
+                    <label for="radio_2" class="radio_label">Slutfört</label>
                 </div>
-                <input type="submit" value="Spara" class="btn btn-primary" class="form-control">   
-                <input type="number" name="taskID" id=""value="{{ task.id }}" style="display: none;">            
+                <a href="" class="hover_secondary_call"><button type="submit">Spara</button></a>  
+                <input type="number" name="taskID" id=""value="{{ task.id }}" style="display: none;">         
                 {% endif %}
             </form>
         </div>

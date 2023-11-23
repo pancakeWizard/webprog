@@ -6,63 +6,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block title %}
+    <link rel="stylesheet" href="{% static 'todo.css' %}">
     <title>To-Do lista</title>
     {% endblock title %}
 </head>
 <body>
     {% block content %}
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-10">
-                <h3>To-Do lista</h3>
+    <div class="container">
+        <div class="content">
+                <h1>To-Do lista</h1>
                 <form action="{% url 'changeStatus' %}" method="post">
-                {% if error %}
-                    <p>{{ error }}</p>
-                {% else %}
+                    {% csrf_token %}
                     {% if tasks %}
-                       
-                            {% csrf_token %}
-                            <table class="table">
-                                <thead class="thead-light">
-                                <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                    <th scope="col">Task</th>
-                                    <th scope="col">Läge</th>
-                                    <th scope="col">Kategori</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    {% for task in tasks %}
-                                        <tr>
-                                            <th scope="row"><input type="checkbox" name="status[]" id="" value="{{ task.id }}"></th>
-                                            <td>
-                                                <a href="{% url 'changeTask' task.id %}" class="link-light text-decoration-none">
-                                                    <img src="{% static 'img/icons8-edit.svg' %}" alt="edit">
-                                                </a>
-                                            </td>
-                                            <td>
-                                                {% if task.status != "Pågående" %}
-                                                    <del class="text-muted">{{ task.task }}</del>
-                                                {% else %}
-                                                    {{ task.task }}
-                                                {% endif %}
-                                            </td>
-                                            <td>{{ task.status}}</td>
-                                            <td>{{task.category}}</td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        
-                    {% endif %}
+                        <table>
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col" class="th_content">Uppgift</th>
+                                <th scope="col" class="th_content">Läge</th>
+                                <th scope="col" class="th_content">Kategori</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for task in tasks %}
+                                    <tr>
+                                        <th scope="row"><input type="checkbox" name="status[]" id="" value="{{ task.id }}"
+                                            class="no_outline"></th>
+                                        <td>
+                                            <a href="{% url 'changeTask' task.id %}" class="link-light text-decoration-none">
+                                                <img src="{% static 'img/icons8-edit.svg' %}" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td class="td_content">
+                                            {% if task.status != "Pågående" %}
+                                                <del class="text-muted">{{ task.task }}</del>
+                                            {% else %}
+                                                {{ task.task }}
+                                            {% endif %}
+                                        </td>
+                                        <td class="td_content">{{ task.status}}</td>
+                                        <td class="td_content">{{task.category}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                 {% endif %}
-                <button class="btn btn-primary"><a href="{% url 'toDoAdd' %}" class="link-light text-decoration-none">Lägga till</a></button>
-                <input type="submit" value="Markera som klar" class="btn btn-primary">
+                <a href="{% url 'toDoAdd' %}" class="link_btn">Lägga till</a>
+                <a href="" class="hover_primary_call"><button type="submit">Markera som klar</button></a>
                 </form>
-            </div>
-            <div class="col-2">
-            </div>
         </div>
     </div>
     {% endblock content %}
