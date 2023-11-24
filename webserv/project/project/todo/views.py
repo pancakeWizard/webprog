@@ -66,7 +66,7 @@ def toDoAddApplier(request):
 def categoryAdd (request):
     user = request.user
     if user.is_authenticated:
-        return redirect('toDoAdd')
+        return render(request, 'todoadd.html')
     else:
         return redirect('login')
 
