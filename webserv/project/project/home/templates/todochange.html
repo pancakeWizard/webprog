@@ -23,7 +23,11 @@
                 <label for="category" class="option_label">Kategori:</label>
                 <select name="category" id="" class="form-control">
                     {% for category in categories %}
-                        <option value="{{ category }}">{{ category }}</option>
+                        {% if category == currentcategory %}
+                            <option value="{{ category }}" selected>{{ category }}</option>
+                        {% else %}
+                            <option value="{{ category }}">{{ category }}</option>
+                        {% endif %}
                     {% endfor %}
                 </select>
                 <a href="{% url 'categoryAdd' %}"  class="accent_link">Lägg till kategori</a>

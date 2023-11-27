@@ -90,6 +90,7 @@ def changeStatus(request):
     user = request.user
     if user.is_authenticated:
         if request.method == "POST":
+            action = request.POST.get("action_btn")
             checked = request.POST.getlist("status[]")
             workingList = []
             taskList = TaskList.objects.all()
@@ -102,8 +103,12 @@ def changeStatus(request):
             for task in taskList:
                 for work in workingList:
                     if task.id == work:
-                        task.status = 2
-                        task.save()
+                        if action == "done":
+                            task.status = 2
+                            task.save()
+                        elif action == "delete":
+                            task.delete()
+
         return redirect('toDo')
     else:
         return redirect('login')
@@ -118,7 +123,9 @@ def changeTask(request, taskID):
             categories_list.append(category.category_name)
         for task in taskList:
             if task.id == taskID and user.username == task.username:
-                return render(request, 'todochange.html', {'task':task, 'categories':categories_list})
+                currentcatid = task.category
+                currentcategory = categories[currentcatid-1].category_name
+                return render(request, 'todochange.html', {'task':task, 'currentcategory':currentcategory,'categories':categories_list})
         return redirect('toDo')
     else:
         return redirect('login')

@@ -53,7 +53,8 @@
                         </table>
                 {% endif %}
                 <a href="{% url 'toDoAdd' %}" class="link_btn">Lägga till</a>
-                <a href="" class="hover_primary_call"><button type="submit">Markera som klar</button></a>
+                <a href="" class="hover_primary_call"><button type="submit" name="action_btn" value="done">Markera som klar</button></a>
+                <a href="" class="hover_primary_call"><button type="submit" name="action_btn" value="delete">Ta bort</button></a>
                 </form>
         </div>
     </div>
