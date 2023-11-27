@@ -5,6 +5,12 @@ from django.shortcuts import redirect, reverse
 
 # Create your views here.
 def toDo(request):
+    """
+    En funktion som tar information om användarens uppgifter från databasen
+    om användaren är auktoriserad. Sedan skickas info vidare till template.
+    Om användare inte loggat in då ska funktionen redirecta användare till
+    inloggnin sida.
+    """
     user = request.user
     if user.is_authenticated:
         tasks = []
@@ -31,6 +37,10 @@ def toDo(request):
     return render(request, 'todo.html', {'tasks':tasks})
 
 def toDoAdd (request):
+    """
+    Funktionen låter användare lägga till en uppgift om användare är inloggad. Annars redirectar till inloggning.
+    Skickar en lista med alla kategorier till template.
+    """
     user = request.user
     if user.is_authenticated:
         categories_list = []
@@ -42,6 +52,13 @@ def toDoAdd (request):
         return redirect('login')
 
 def toDoAddApplier(request):
+    """
+    Funktionen bearbetar form från template av toDoAdd funktionen.
+    Funktionen tar emot info och sparar den i databas och därefter
+    redirectar användare vidare till to-do-lista.
+    Om användare inte är inloggad så ska den redirectas till 
+    logga in sida.
+    """
     user = request.user
     if user.is_authenticated:
         if request.method == "POST":
@@ -64,6 +81,11 @@ def toDoAddApplier(request):
         return redirect('login')
 
 def categoryAdd (request):
+    """
+    Funktionen visar template med form för att lägga till 
+    kategori om anvädare är inloggad. Annars redirectas 
+    användare till logga in.
+    """
     user = request.user
     if user.is_authenticated:
         return render(request, 'todoadd.html')
@@ -71,11 +93,17 @@ def categoryAdd (request):
         return redirect('login')
 
 def categoryApplier (request):
+    """
+    Funktionen bearbetar form från categoryAdd.
+    Ny kategori sparas i databas och sedan redirectas
+    användare till sin to-do-lista.
+    Om man inte skriver in någon symbol som namn på kategorin så
+    kommer användare att redirectas till categoryAdd igen.
+    Detta görs för att undvika tomma kategorier.
+    """
     user = request.user
     if user.is_authenticated:
         if request.method == "POST":
-            name = request.POST.get('categoryname')
-
             if request.POST.get('categoryname'):
                 TaskCategory.objects.create(category_name = request.POST.get('categoryname'))
                 return redirect('toDo')
@@ -87,6 +115,14 @@ def categoryApplier (request):
         return redirect('login')
 
 def changeStatus(request):
+    """
+    Denna funktion bearbetar en form från toDo sidan.
+    Om man markerar en eller några uppgifter så ska
+    man kunna ändra läge till slutfört eller ta bort
+    de uppgifterna. Sedan redirectas man tillbaka till
+    uppdaterade versionen av toDo. Om man inte inloggad
+    så ska man redirectas till logga in.
+    """
     user = request.user
     if user.is_authenticated:
         if request.method == "POST":
@@ -114,6 +150,16 @@ def changeStatus(request):
         return redirect('login')
 
 def changeTask(request, taskID):
+    """
+    Funktionen tar allt information om en uppgift
+    man vill ändra och erbjuder möjlighet att ändra den.
+    Som standardvärde används det de värde som finns nu
+    i databasen. De skickas till html.
+    Om användare inte är inloggat så ska den redirectas till logga in.
+    Om man inte har några uppgifter men ändå når urlen så ska den
+    redirectas till toDo sidan.
+
+    """
     user = request.user
     if user.is_authenticated:
         taskList = TaskList.objects.all()
@@ -131,6 +177,13 @@ def changeTask(request, taskID):
         return redirect('login')
 
 def changeTaskApply(request):
+    """
+    Funktionen bearbetar form från changeTask.
+    User input uppdaterar info i databas och
+    skickar användare till toDo.
+    Om användare inte är inloggat så ska funktionen
+    redirecta till logga in.
+    """
     user = request.user
     if user.is_authenticated:
         if request.method == "POST":
