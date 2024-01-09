@@ -135,7 +135,7 @@ def changeStatus(request):
                 for check in checked:
                     check = int(check)
                     if task.username == username_auth and task.id == check:
-                        workingList.append(task.id)
+                        workingList.appendwq
             for task in taskList:
                 for work in workingList:
                     if task.id == work:

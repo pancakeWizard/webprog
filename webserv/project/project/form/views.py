@@ -54,7 +54,7 @@ def auth(request):
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
+            login(request, user )
             return redirect('profile')
         else:
             return render(request, 'login.html', {'error': wrongUserData})
