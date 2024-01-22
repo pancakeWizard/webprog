@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmer</title>
+</head>
+<body>
+    {% for film_info in film_infos %}
+        <h2>{{ film_info.title }}</h2>
+        <a href="{% url 'directorFilmer' film_info.director.id %}">{{ film_info.director }}</a>
+    {% endfor %}
+</body>
+</html>
