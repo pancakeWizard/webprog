@@ -6,9 +6,66 @@
     <title>Filmer</title>
 </head>
 <body>
+    <h1>Filmer</h1>
+    <a href="{% url 'addFilm' %}">Lägga till en film</a>
+    <form action="{% url 'filmerHome' %}" method="post">
+        {% csrf_token %}
+        <label for="">
+            Söka film:
+            <input type="text" name="film" id="film">
+       </label>
+        <p>Genre:</p>
+        <label for="">
+            <input type="radio" name="genre" id="genre_0" value="Historia" checked="true">
+            Historia
+        </label>
+        <br>
+        <label for="">
+            <input type="radio" name="genre" id="genre_1" value="Thriller" checked="true">
+            Thriller
+        </label>
+        <br>
+        <label for="">
+            <input type="radio" name="genre" id="genre_2" value="Action" checked="true">
+            Action
+        </label>
+        <br>
+       <label for="">
+            <input type="radio" name="genre" id="genre_3" value="Skräck" checked="true">
+            Skräck
+       </label>
+        <br>
+       <label for="">
+            <input type="radio" name="genre" id="genre_4" value="Dramatik" checked="true">
+            Dramatik
+       </label>
+       <br>
+       <label for="">
+            <input type="radio" name="genre" id="genre_3" value="Alla" checked="true">
+            Alla
+       </label>
+       <br>
+       <label for="">
+            År: 
+            <input type="number" name="year">
+        </label>
+       <br>
+       <label for="">
+            Sortera efter år:
+            <input type="checkbox" name="sortera" id="sortera">
+       </label>
+       <br>
+       <input type="submit" value="Filtrera/Söka">
+       <br>
+       
+    </form>
     {% for film_info in film_infos %}
-        <h2>{{ film_info.title }}</h2>
-        <a href="{% url 'directorFilmer' film_info.director.id %}">{{ film_info.director }}</a>
+    <ul>
+        <li>Title: {{ film_info.title }}</li>
+        <li>Regissör: <a href="{% url 'directorFilmer' film_info.director.id %}">{{ film_info.director }}</a></li>
+        <li>Genre: {{ film_info.genre }}</li>
+        <li>År: {{ film_info.year }}</li>
+    </ul>        
     {% endfor %}
 </body>
 </html>

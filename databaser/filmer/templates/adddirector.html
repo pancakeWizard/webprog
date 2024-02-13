@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Lägga till en regissör</h1>
+    {% if error %}
+    <p>{{ error }}</p>
+    {% endif %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="">Namn och efternamn:<input type="text" name="name" required></label>
+        <br>
+        <br>
+        <label for="">Ålder:<input type="number" name="age" id="" required> </label>
+        <br>
+        <br>
+        <label for="">Beskrivning:
+            <textarea name="description" id="" cols="30" rows="10" required></textarea>
+        </label>
+        <br>
+        <br>
+        <input type="submit" value="Lägga till">
+    </form>
+</body>
+</html>

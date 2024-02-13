@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lägga till en film</title>
+</head>
+<body>
+    <h1>Lägga till en film</h1>
+    {% if error %}
+    <p>{{error}}</p>
+    {% endif %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="">
+            Filmens titel:
+            <input type="text" name="name" id="" maxlength="250" required>
+        </label>
+        <br>
+        <br>
+        <label for="">
+            Regissör:
+            <select name="director" id="" required>
+                {% for director in directors %}
+                <option value="{{ director }}">{{ director }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <a href="{% url 'addDirector' %}">Lägga till en regissör</a>
+        </label>
+        <br>
+        <br>
+        <label for="">
+            År:
+            <input type="number" name="year" id="" required>
+        </label>
+        <br>
+        <br>
+        <label for="">
+            Längd (i minuter):
+            <input type="number" name="length" id="" required>
+        </label>
+        <br>
+        <br>
+        <label for="">
+            Genre:
+            <input type="text" name="genre" id=""required>
+        </label>
+        <br>
+        <br>
+        <input type="submit" value="Lägga till">
+    </form>
+</body>
+</html>
