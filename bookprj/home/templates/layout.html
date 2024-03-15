@@ -12,13 +12,25 @@
 <body>
     <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          {% if navMainBtn %}
+            <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}">Home</a>
+          {% else %}
+            <a class="nav-link" aria-current="page" href="{% url 'homepage' %}">Home</a>
+          {% endif %}
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Böcker</a>
+          {% if navBookBtn %}
+            <a class="nav-link active" href="{% url 'books' %}">Böcker</a>
+          {% else %}
+            <a class="nav-link" href="{% url 'books' %}">Böcker</a>
+          {% endif %}
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Författare</a>
+          {% if navAuthorBtn %}
+            <a class="nav-link active" href="#">Författare</a>
+          {% else %}
+            <a class="nav-link" href="#">Författare</a>
+          {% endif %}
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Under development</a>
