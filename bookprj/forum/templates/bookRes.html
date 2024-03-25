@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block additional_modules %}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="{% static 'icons.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <h5 class="card-header">{{ book.title }}</h5>
+    <div class="card-body">
+        <h5 class="card-title"></h5>
+            {% for author in book.author.all %}
+              {{ author }}
+            {% endfor %}
+        </h5>
+      <p class="card-text">{{ book.description }}</p>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#authorModal">
+        Författare
+      </button>
+      <form action="{% url 'bookRes' book.title book.id %}" method="post" class="mt-3 d-flex">
+        {% csrf_token %}
+        {% if user_book_like_status.like != 1 %}
+          <button type="submit" name="bookLike" value="like" class="btn btn-link d-flex gap-2 text-decoration-none"><p>{{ book.likes }}</p><span class="material-symbols-outlined">thumb_up</span></button>
+        {% endif %}
+        {% if user_book_like_status.like == 1 %}
+          <button type="submit" name="bookLike" value="like_remove" class="btn btn-link d-flex gap-2 text-decoration-none"><p>{{ book.likes }}</p><span class="material-symbols-outlined fill_icon">thumb_up</span></button>
+        {% endif %}
+        {% if user_book_like_status.like != 2 %}
+          <button type="submit" name="bookLike" value="dislike" class="btn btn-link link-danger d-flex gap-2 text-decoration-none"><span class="material-symbols-outlined">thumb_down</span><p>{{ book.dislikes }}</p></button>
+        {% endif %}
+        {% if user_book_like_status.like == 2 %}
+          <button type="submit" name="bookLike" value="dislike_remove" class="btn btn-link link-danger d-flex gap-2 text-decoration-none"><span class="material-symbols-outlined fill_icon">thumb_down</span><p>{{ book.dislikes }}</p></button>
+        {% endif %}
+      </form>
+    </div>
+</div>
+
+<div class="modal fade" id="authorModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title">{{ book.title }} - författare</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {% for author in book.author.all %}
+          <a href="#" class="link-primary">{{ author }}</a> <br>
+        {% endfor %}
+      </div>
+    </div>
+  </div>    
+</div>
+  {% for recension in recensions %}
+    <div class="card 1">
+      <h5 class="card-header">{{ recension.author }} ({{ recension.time|date:"Y-m-d" }})</h5>
+      <div class="card-body">
+        <p class="card-text">
+          {{ recension.recension }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+
+{%  endblock %}
