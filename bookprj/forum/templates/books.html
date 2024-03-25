@@ -1,8 +1,76 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+
+{% if user.is_authenticated %}
+<div class="modal fade" id="addAuthorModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-title">Lägga till en författare</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="authorName" class="col-form-label">Namn:</label>
+                <input class="form-control" type="text" name="authorName" id="authorName" required>
+                <br>
+                <label for="authorDescription" class="col-form-label">Beskrivning:</label>
+                <textarea class="form-control" id="authorDescription" name="description"></textarea>
+            </div>
+            <input type="submit" value="Lägga till" type="button" class="btn btn-primary">
+          </form>
+        </div>
+      </div>
+    </div>    
+  </div>
+{% endif %}
+
+{% if user.is_authenticated %}
+<div class="modal fade" id="addBookModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-title">Lägga till en bok</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="bookTitle" class="col-form-label">Titel:</label>
+                <input class="form-control" type="text" name="bookTitle" id="bookTitle" required>
+                <br>
+                <label for="bookAuthor" class="col-form-label">Författare:</label>
+                <select name="bookAuthor" id="bookAuthor" class="form-control">
+                  {% for author in authors %}
+                  <option value="{{ author }}">{{ author }}</option>
+                  {% endfor %}
+                </select>
+                <button class="btn btn-link text-decoration-underline" data-bs-toggle="modal" data-bs-target="#addAuthorModal">Lägga till ny författare</button>
+                <br>
+                <label for="bookDescription" class="col-form-label">Beskrivning:</label>
+                <textarea class="form-control" id="bookDescription" name="description"></textarea>
+            </div>
+            <input type="submit" value="Lägga till" type="button" class="btn btn-primary">
+          </form>
+        </div>
+      </div>
+    </div>    
+  </div>
+{% endif %}
+
 <div class="container mt-5">
     <div class="row">
+{% if user.is_authenticated %}
+        <div class="col-3 mb-5">
+            <div class="card d-flex flex-column h-100 justify-content-center align-items-center" style="width: 18rem;">
+                <button class="card-title btn btn-primary text-decoration-underline" data-bs-toggle="modal" data-bs-target="#addBookModal">Lägga till en bok</button>
+            </div>
+        </div>
+{% endif %}
 {% for book in books %}
         <div class="col-3 mb-5">
             <div class="card d-flex flex-column h-100" style="width: 18rem;">

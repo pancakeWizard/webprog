@@ -16,9 +16,11 @@ def reverse_map(map, value):
 # Create your views here.
 def books(request):
     books = Book.objects.all()
+    authors = Author.objects.all()
     data = {
         "navBookBtn": True,
-        "books": books
+        "books": books,
+        "authors": authors
     }
     return render(request, 'books.html', data)
 
@@ -95,16 +97,29 @@ def authors(request):
     return render(request, "authors.html", data)
 
 def filterBooks(request):
+    data = {
+        }
     if request.method == "POST":
         books = Book.objects.all()
         user_author = request.POST.get("author")
-        author = Author.objects.get(id=user_author)
-        books = books.filter(author=author)
-        data = {
-            "navBookBtn": True,
-            "books":books
-        }
-        return render(request, 'books.html', data)
+        if user_author:
+            author = Author.objects.get(id=user_author)
+            books = books.filter(author=author)
+            data["books"] = books
+            data["navBookBtn"] = True
+            return render(request, 'books.html', data)
+        search_book_input = request.POST.get("search_book")
+        if search_book_input:
+            books = books.filter(title__icontains=search_book_input)
+            data["books"] = books
+            data["navBookBtn"] = True
+            return render(request, 'books.html', data)
+        search_author_input = request.POST.get("search_author")
+        if search_author_input:
+            authors = Author.objects.filter(name__icontains=search_author_input)
+            data["authors"] = authors
+            data["navAuthorBtn"] = True
+            return render(request, "authors.html", data)
     redirect('books')
 
 def author(request, authorName, authorId):
@@ -116,3 +131,6 @@ def author(request, authorName, authorId):
         "books": books
     }
     return render(request, 'author.html', data)
+
+def addBook(request):
+    pass
