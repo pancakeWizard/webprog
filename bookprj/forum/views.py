@@ -76,7 +76,7 @@ def bookCreateRes(request, bookName, bookId):
             recension = request.POST.get("recension")
             book = Book.objects.get(id=bookId)
             try:
-                user_res_query = Recension.objects.get(author=request.user)
+                user_res_query = Recension.objects.get(author=request.user, book=book)
             except:
                 user_res_query = Recension.objects.create(book=book, author=request.user, recension=recension)
             else:
@@ -105,7 +105,14 @@ def filterBooks(request):
             "books":books
         }
         return render(request, 'books.html', data)
-    else:
-        redirect('books')
-    
-    pass
+    redirect('books')
+
+def author(request, authorName, authorId):
+    author = Author.objects.get(id=authorId)
+    books = Book.objects.filter(author=author)
+    data = {
+        "navAuthorBtn": True,
+        "author":author,
+        "books": books
+    }
+    return render(request, 'author.html', data)

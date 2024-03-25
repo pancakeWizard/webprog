@@ -9,11 +9,12 @@
                 <h5 class="card-title">{{ author.name }}</h5>
                 <p class="card-text flex-fill">{{ author.description|truncatechars:100 }}</p>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer d-flex align-items-center justify-content-between">
                     <form action="{% url 'filterBooks' %}" method="post">
                         {% csrf_token %}
                         <button type="submit" name="author" class="btn btn-link" value="{{ author.id }}">Böcker</button>
                     </form>
+                    <a href="{% url 'author' author.name author.id %}">Mer info</a>
                 </div>
             </div>
         </div>

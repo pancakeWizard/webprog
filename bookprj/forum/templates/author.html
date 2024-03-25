@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+      <h5 class="card-header">{{ author.name }}</h5>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ author.description }}</p>
+    </div>
+</div>
+
+{% for book in books %}
+    <div class="card 1">
+        <a class="card-header" href="{% url 'bookRes' book.title book.id %}">{{ book.title }}</a>
+        <div class="card-body">
+            <p class="card-text">
+                {{ book.description }}
+            </p>
+        </div>
+    </div>
+{% endfor %}
+
+{%  endblock %}

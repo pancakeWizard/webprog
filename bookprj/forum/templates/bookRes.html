@@ -52,7 +52,7 @@
       </div>
       <div class="modal-body">
         {% for author in book.author.all %}
-          <a href="#" class="link-primary">{{ author }}</a> <br>
+          <a href="{% url 'author' author.name author.id %}" class="link-primary">{{ author }}</a> <br>
         {% endfor %}
       </div>
     </div>
