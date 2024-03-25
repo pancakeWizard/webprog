@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+{% for author in authors %}
+        <div class="col-3 mb-5">
+            <div class="card d-flex flex-column h-100" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">{{ author.name }}</h5>
+                <p class="card-text flex-fill">{{ author.description|truncatechars:100 }}</p>
+                </div>
+                <div class="card-footer">
+                    <form action="{% url 'filterBooks' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="author" class="btn btn-link" value="{{ author.id }}">Böcker</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+{% endfor %}
+    </div>
+</div>
+{%  endblock %}

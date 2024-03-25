@@ -9,33 +9,38 @@
 {% block content %}
 
 <div class="card">
+  <div class="card-header d-flex justify-content-between">
     <h5 class="card-header">{{ book.title }}</h5>
-    <div class="card-body">
-        <h5 class="card-title"></h5>
-            {% for author in book.author.all %}
-              {{ author }}
-            {% endfor %}
-        </h5>
-      <p class="card-text">{{ book.description }}</p>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#authorModal">
-        Författare
-      </button>
-      <form action="{% url 'bookRes' book.title book.id %}" method="post" class="mt-3 d-flex">
-        {% csrf_token %}
-        {% if user_book_like_status.like != 1 %}
-          <button type="submit" name="bookLike" value="like" class="btn btn-link d-flex gap-2 text-decoration-none"><p>{{ book.likes }}</p><span class="material-symbols-outlined">thumb_up</span></button>
-        {% endif %}
-        {% if user_book_like_status.like == 1 %}
-          <button type="submit" name="bookLike" value="like_remove" class="btn btn-link d-flex gap-2 text-decoration-none"><p>{{ book.likes }}</p><span class="material-symbols-outlined fill_icon">thumb_up</span></button>
-        {% endif %}
-        {% if user_book_like_status.like != 2 %}
-          <button type="submit" name="bookLike" value="dislike" class="btn btn-link link-danger d-flex gap-2 text-decoration-none"><span class="material-symbols-outlined">thumb_down</span><p>{{ book.dislikes }}</p></button>
-        {% endif %}
-        {% if user_book_like_status.like == 2 %}
-          <button type="submit" name="bookLike" value="dislike_remove" class="btn btn-link link-danger d-flex gap-2 text-decoration-none"><span class="material-symbols-outlined fill_icon">thumb_down</span><p>{{ book.dislikes }}</p></button>
-        {% endif %}
-      </form>
-    </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#recensionModal">
+      Skriv egen recension
+    </button>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+      {% for author in book.author.all %}
+        {{ author }}
+      {% endfor %}
+    </h5>
+    <p class="card-text">{{ book.description }}</p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#authorModal">
+      Författare
+    </button>
+    <form action="{% url 'bookRes' book.title book.id %}" method="post" class="mt-3 d-flex">
+      {% csrf_token %}
+      {% if user_book_like_status.like != 1 %}
+        <button type="submit" name="bookLike" value="like" class="btn btn-link d-flex gap-2 text-decoration-none"><p>{{ book.likes }}</p><span class="material-symbols-outlined">thumb_up</span></button>
+      {% endif %}
+      {% if user_book_like_status.like == 1 %}
+        <button type="submit" name="bookLike" value="like_remove" class="btn btn-link d-flex gap-2 text-decoration-none"><p>{{ book.likes }}</p><span class="material-symbols-outlined fill_icon">thumb_up</span></button>
+      {% endif %}
+      {% if user_book_like_status.like != 2 %}
+        <button type="submit" name="bookLike" value="dislike" class="btn btn-link link-danger d-flex gap-2 text-decoration-none"><span class="material-symbols-outlined">thumb_down</span><p>{{ book.dislikes }}</p></button>
+      {% endif %}
+      {% if user_book_like_status.like == 2 %}
+        <button type="submit" name="bookLike" value="dislike_remove" class="btn btn-link link-danger d-flex gap-2 text-decoration-none"><span class="material-symbols-outlined fill_icon">thumb_down</span><p>{{ book.dislikes }}</p></button>
+      {% endif %}
+    </form>
+  </div>
 </div>
 
 <div class="modal fade" id="authorModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
@@ -53,6 +58,32 @@
     </div>
   </div>    
 </div>
+
+<div class="modal fade" id="recensionModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title">{{ book.title }} - recensera</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'bookCreateRes' book.title book.id %}" method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="recension" class="col-form-label">Recension:</label>
+            {% if cur_user_rec != False %}
+              <textarea class="form-control" id="recension" name="recension" required>{{ cur_user_rec.recension }}</textarea>
+            {% else %}
+              <textarea class="form-control" id="recension" name="recension" required></textarea>
+            {% endif %}
+          </div>
+          <input type="submit" value="Spara" type="button" class="btn btn-primary">
+        </form>
+      </div>
+    </div>
+  </div>    
+</div>
+
   {% for recension in recensions %}
     <div class="card 1">
       <h5 class="card-header">{{ recension.author }} ({{ recension.time|date:"Y-m-d" }})</h5>
