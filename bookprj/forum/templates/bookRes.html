@@ -10,7 +10,7 @@
 
 <div class="card">
   <div class="card-header d-flex justify-content-between">
-    <h5 class="card-header">{{ book.title }}</h5>
+    <h5>{{ book.title }}</h5>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#recensionModal">
       Skriv egen recension
     </button>
@@ -86,7 +86,16 @@
 
   {% for recension in recensions %}
     <div class="card 1">
-      <h5 class="card-header">{{ recension.author }} ({{ recension.time|date:"Y-m-d" }})</h5>
+      <div class="card-header d-flex justify-content-between">
+      <h5>{{ recension.author }} ({{ recension.time|date:"Y-m-d" }})</h5>
+      {% if recension.author == request.user %}
+      <form action="{% url 'deleteRes' book.title book.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="res_id" value="{{ recension.id }}">
+        <input type="submit" class="btn btn-danger" value="Ta bort">
+      </form>
+      {% endif %}
+    </div>
       <div class="card-body">
         <p class="card-text">
           {{ recension.recension }}

@@ -1,5 +1,8 @@
 {% extends 'layout.html' %}
-
+{% load static %}
+{% block additional_modules %}
+  <script src="{% static 'multipleAuthors.js' %}"></script>
+{% endblock %}
 {% block content %}
 
 {% if user.is_authenticated %}
@@ -11,7 +14,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="" method="post">
+          <form action="{% url 'add' %}" method="post">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="authorName" class="col-form-label">Namn:</label>
@@ -37,19 +40,25 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="" method="post">
+          <form action="{% url 'add' %}" method="post">
             {% csrf_token %}
-            <div class="mb-3">
+            <div class="mb-3" id="addBookForm">
                 <label for="bookTitle" class="col-form-label">Titel:</label>
                 <input class="form-control" type="text" name="bookTitle" id="bookTitle" required>
                 <br>
-                <label for="bookAuthor" class="col-form-label">Författare:</label>
-                <select name="bookAuthor" id="bookAuthor" class="form-control">
-                  {% for author in authors %}
-                  <option value="{{ author }}">{{ author }}</option>
-                  {% endfor %}
-                </select>
+                <div id="authors">
+                  <div id="mainAuthorSelect">
+                    <label for="bookAuthor" class="col-form-label">Författare:</label>
+                    <select name="bookAuthor_1" id="bookAuthor" class="form-control">
+                      {% for author in authors %}
+                      <option value="{{ author }}">{{ author }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <input hidden type="number" id="authorHelper" name="authorHelper" value="1">
                 <button class="btn btn-link text-decoration-underline" data-bs-toggle="modal" data-bs-target="#addAuthorModal">Lägga till ny författare</button>
+                <button class="btn btn-link text-decoration-underline" id="moreAuthorsTrigger" type="button">Lägga till flera författare</button>
                 <br>
                 <label for="bookDescription" class="col-form-label">Beskrivning:</label>
                 <textarea class="form-control" id="bookDescription" name="description"></textarea>
@@ -75,7 +84,16 @@
         <div class="col-3 mb-5">
             <div class="card d-flex flex-column h-100" style="width: 18rem;">
                 <div class="card-body">
-                <h5 class="card-title">{{ book.title }}</h5>
+                <div class="d-flex justify-content-between ">
+                  <h5 class="card-title">{{ book.title }}</h5>
+                  {% if request.user == book.user %}
+                  <form action="{% url 'deleteBook' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="bookId" value="{{ book.id }}">
+                    <input type="submit" value="Ta bort" class="btn btn-link">
+                  </form>
+                  {% endif %}
+                </div>
                 {% for author in book.author.all %}
                     <h6 class="card-subtitle mb-2 text-body-secondary">{{ author.name }}</h6>
                 {% endfor %}

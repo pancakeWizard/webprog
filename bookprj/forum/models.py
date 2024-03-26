@@ -13,6 +13,7 @@ class Book(models.Model):
     title = models.TextField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     author = models.ManyToManyField(Author, blank=True)
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     likes = models.IntegerField(null=True, default=0)
     dislikes = models.IntegerField(null=True, default=0)
 

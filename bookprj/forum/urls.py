@@ -9,5 +9,7 @@ urlpatterns = [
     path('authors/', views.authors, name="authors"),
     path('filtred/', views.filterBooks, name="filterBooks"),
     path('author/<str:authorName>.<int:authorId>/', views.author, name="author"),
-    path('addBook', views.addBook, name="addBook")
+    path('add/', views.add, name="add"),
+    path('deleteRes/<str:bookName>.<int:bookId>/', views.deleteRes, name="deleteRes"),
+    path('deleteBook/>', views.deleteBook, name="deleteBook")
 ]

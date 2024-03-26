@@ -2,18 +2,12 @@ from django.shortcuts import redirect, render
 from . models import *
 
 LIKE_MAPPING = {
+    "like_remove":      0,
+    "dislike_remove":   0,
     "like" :            1,
     "dislike":          2,
 }
 
-
-def reverse_map(map, value):
-    for key, val in map.items():
-        if val == value:
-            return key
-    return None
-
-# Create your views here.
 def books(request):
     books = Book.objects.all()
     authors = Author.objects.all()
@@ -97,7 +91,9 @@ def authors(request):
     return render(request, "authors.html", data)
 
 def filterBooks(request):
+    authors  = Author.objects.all()
     data = {
+        "authors": authors
         }
     if request.method == "POST":
         books = Book.objects.all()
@@ -120,7 +116,7 @@ def filterBooks(request):
             data["authors"] = authors
             data["navAuthorBtn"] = True
             return render(request, "authors.html", data)
-    redirect('books')
+    return redirect('books')
 
 def author(request, authorName, authorId):
     author = Author.objects.get(id=authorId)
@@ -132,5 +128,44 @@ def author(request, authorName, authorId):
     }
     return render(request, 'author.html', data)
 
-def addBook(request):
-    pass
+def add(request):
+    user = request.user
+    if user.is_authenticated:
+        if request.method == "POST":
+            bookTitle = request.POST.get("bookTitle")
+            if bookTitle:
+                description = request.POST.get("description")
+                book_query = Book.objects.create(title=bookTitle, description=description, user=user)
+                book_query.save()
+                authors_amount = request.POST.get("authorHelper")
+                for i in range(int(authors_amount)):
+                    bookAuthor = request.POST.get(f"bookAuthor_{i+1}")
+                    author = Author.objects.get(name=bookAuthor)
+                    book_query.author.add(author)
+            else:
+                authorName = request.POST.get("authorName")
+                try:
+                    author = Author.objects.get(name=authorName)
+                except:
+                    description = request.POST.get("description")
+                    author_query = Author.objects.create(name=authorName, description=description)
+                    author_query.save()
+    return redirect('books')
+
+def deleteRes(request, bookName, bookId):
+    if request.method == "POST":
+        try:
+            res_id = request.POST.get("res_id")
+            Recension.objects.get(id=res_id).delete()
+        except:
+            pass
+    
+    return redirect('bookRes', bookName, bookId)
+
+def deleteBook(request):
+    if request.method == "POST":
+        
+        bookId = request.POST.get("bookId")
+        book = Book.objects.get(id=bookId).delete()
+
+    return redirect('books')
